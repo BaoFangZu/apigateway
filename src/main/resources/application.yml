@@ -1,0 +1,58 @@
+info:
+  component: API-GATEWAY
+
+server:
+  port: 10001
+
+security:
+  sessions: NEVER
+management:
+  security:
+    enabled: false
+spring:
+  redis:
+    host: 10.21.22.229
+    port: 6379
+    password: 28721BE237B600B2F4C6C464D37969F6
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST=(ADDRESS =(PROTOCOL = TCP)(HOST=10.21.23.243)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=xe)))
+    username: hicloud_iam
+    password: 3BEF785D37ED60A6809CEE38C3333C6B
+
+spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://10.68.51.99:8765/eureka/
+
+#logging.level.ROOT: DEBUG
+
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+
+zuul:
+  sensitiveHeaders:
+  routes:
+    test:
+        path: /test/**
+        stripPrefix: false
+        serviceId: test
