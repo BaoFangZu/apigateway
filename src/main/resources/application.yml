@@ -11,16 +11,12 @@ management:
     enabled: false
 spring:
   redis:
-    host: 10.21.22.229
+    host: 10.21.21.102
     port: 6379
-    password: 28721BE237B600B2F4C6C464D37969F6
-  datasource:
-    driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST=(ADDRESS =(PROTOCOL = TCP)(HOST=10.21.23.243)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=xe)))
-    username: hicloud_iam
-    password: 3BEF785D37ED60A6809CEE38C3333C6B
+    password: HuaWei!@#123
 
-spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
+#spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
+spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 eureka:
   instance:
