@@ -12,9 +12,9 @@ management:
 
 spring:
   redis:
-    host: 10.68.51.99
+    host: 10.22.59.82
     port: 6379
-    #password: HuaWei!@#123
+    password: HuaWei!@#123
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://10.68.51.99:3300/exposure
