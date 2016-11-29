@@ -9,14 +9,20 @@ security:
 management:
   security:
     enabled: false
+
 spring:
   redis:
-    host: 10.21.21.102
+    host: 10.68.51.99
     port: 6379
-    password: HuaWei!@#123
+    #password: HuaWei!@#123
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.68.51.99:3300/exposure
+    username: root
+    password: 123456
 
 #spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
-spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
 eureka:
   instance:
@@ -32,10 +38,11 @@ eureka:
 #logging.level.ROOT: DEBUG
 
 
-ribbon:
-  ConnectTimeout: 3000
+ribbon: 
   ReadTimeout: 60000
-
+  MaxAutoRetries: 1
+  
+  
 hystrix:
   command:
     default:
@@ -46,9 +53,17 @@ hystrix:
 
 
 zuul:
+  sslHostnameValidationEnabled: false
   sensitiveHeaders:
   routes:
+    gateway:
+        path: /gw/**
+        stripPrefix: true
+        url: https://10.21.152.240/
     test:
         path: /test/**
         stripPrefix: false
         serviceId: test
+    basisSettingWatch:
+        path: /im/**
+        url: https://10.21.29.38/im/
