@@ -29,14 +29,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		//.loginProcessingUrl("/api/tokens")
 		//http.formLogin().loginProcessingUrl("/api/tokens").defaultSuccessUrl("/api/me")
-		http.httpBasic()
+		//http.httpBasic()
+		http.formLogin().loginPage("/login")
 		.and()
 			.logout()
 		.and()
 			.authorizeRequests()
-			.antMatchers("/login","/logout","/api/*").permitAll().anyRequest().authenticated()
+			.antMatchers("/login","/logout").permitAll()
+			.anyRequest().authenticated()
 			.and()
 		//	.httpBasic().disable()
 			.csrf().disable();
